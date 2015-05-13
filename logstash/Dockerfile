@@ -1,8 +1,8 @@
 FROM ubuntu:14.04
 
 ENV DEBIAN_FRONTEND noninteractive
-ENV LOGSTASH_VER 1.5.0.rc2
-ENV LS_HEAP_SIZE=2g
+ENV LOGSTASH_VER 1.5.0.rc4
+ENV LS_HEAP_SIZE=1g
 WORKDIR /opt
 
 # Dependencies
