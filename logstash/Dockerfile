@@ -23,12 +23,10 @@ RUN /opt/logstash/bin/plugin install logstash-input-log-courier
 
 # Config files
 ADD server.conf /etc/logstash/server.conf
-ADD logstash-forwarder.key /etc/logstash/logstash-forwarder.key
-ADD logstash-forwarder.crt /etc/logstash/logstash-forwarder.crt
+#ADD logstash-forwarder.key /etc/logstash/logstash-forwarder.key
+#ADD logstash-forwarder.crt /etc/logstash/logstash-forwarder.crt
 
 # lumberjack port
 EXPOSE 4545
-# log-courier port
-EXPOSE 4546
 
 CMD /opt/logstash/bin/logstash -f /etc/logstash/server.conf
