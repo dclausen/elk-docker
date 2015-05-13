@@ -3,16 +3,14 @@ kibana:
   build: ./kibana
   restart: always
   hostname: kibana
-  ports:
-    - "5601:5601"
   links:
-    - "elasticsearch:elasticsearch"
+    - "elasticsearch"
 
 elasticsearch:
 
   build: ./elasticsearch
   restart: always
-  hostname: eleasticsearch
+  hostname: elasticsearch
   ports:
     - "9200:9200"
     - "9300:9300"
@@ -29,3 +27,13 @@ logstash:
     - "4546:4546"
   volumes:
     - "/data:/data"
+
+nginx:
+
+  build: ./nginx
+  restart: always
+  hostname: nginx
+  ports:
+    - "80:80"
+  links:
+    - "kibana"
