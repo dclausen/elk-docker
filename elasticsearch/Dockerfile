@@ -1,9 +1,9 @@
 # Pull base image.
-FROM dockerfile/java:oracle-java8
+FROM java:8
 
 # Set install version
 ENV ES_PKG_NAME elasticsearch-1.5.0
-ENV ES_HEAP_SIZE=8g
+ENV ES_HEAP_SIZE=1g
 
 # Install ElasticSearch
 RUN \
