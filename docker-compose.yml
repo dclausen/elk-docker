@@ -11,7 +11,7 @@ elasticsearch:
   build: ./elasticsearch
   restart: always
   hostname: elasticsearch
-  ports:
+  expose:
     - "9200:9200"
     - "9300:9300"
   volumes:
@@ -24,7 +24,6 @@ logstash:
   hostname: logstash
   ports:
     - "4545:4545"
-    - "4546:4546"
   volumes:
     - "/data:/data"
 
