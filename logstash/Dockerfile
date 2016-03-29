@@ -1,7 +1,7 @@
 FROM ubuntu:14.04
 
 ENV DEBIAN_FRONTEND noninteractive
-ENV LOGSTASH_VER 1.5.0.rc4
+ENV LOGSTASH_VER 2.2.2
 ENV LS_HEAP_SIZE=1g
 WORKDIR /opt
 
@@ -19,7 +19,7 @@ RUN wget --quiet "https://download.elasticsearch.org/logstash/logstash/logstash-
 
 # Install plugins
 RUN /opt/logstash/bin/plugin update logstash-output-zeromq
-RUN /opt/logstash/bin/plugin install logstash-input-log-courier
+#RUN /opt/logstash/bin/plugin install logstash-input-log-courier
 
 # Config files
 ADD server.conf /etc/logstash/server.conf
