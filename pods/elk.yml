@@ -1,0 +1,66 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: elasticsearch-elk
+  labels:
+    app: elk
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 9200
+  selector:
+    app: elk
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: kibana
+  labels:
+    app: elk
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 5601
+  selector:
+    app: elk
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: logstash
+  labels:
+    app: elk
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 4545
+    name: logstash
+    protocol: UDP
+  selector:
+    app: elk
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: elk
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: elk
+    spec:
+      containers:
+      - name: elasticsearch
+        image: "dclausen/elk-elasticsearch:latest"
+        volumeMounts:
+          - name: search
+            mountPath: /data
+      - name: kibana
+        image: "dclausen/elk-kibana:latest"
+      - name: logstash
+        image: "dclausen/elk-logstash:latest"
+      volumes:
+      - name: search
+        hostPath:
+          path: "/data/search"
